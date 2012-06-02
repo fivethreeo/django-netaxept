@@ -1,0 +1,3 @@
+recursive-include djpayex2/templates *
+recursive-include djpayex2/locale *
+recursive-include djpayex2/static *
