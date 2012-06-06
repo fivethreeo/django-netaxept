@@ -50,10 +50,11 @@ def get_basic_registerrequest(client, redirecturl, language):
     return request
         
 def handle_response_exception(exception, obj):
-    result = exception.fault.detail.BBSException.Result
+    bbsexception = exception.fault.detail.BBSException 
+    result = bbsexception.Result
     obj.flagged = True
     obj.responsecode = result.ResponseCode
     obj.responsesource = result.ResponseSource
     obj.responsetext = result.ResponseText
-    obj.message = exception.fault.detail.Message
+    obj.message = bbsexception.Message
     logger.debug(obj.__dict__)
