@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
-
+from django.conf import settings
 from suds.client import Client
 
-from django.conf import settings
+import logging
+logger = logging.getLogger(__name__)
 
 WSDL = getattr(settings, 'NETAXEPT_WSDL', 'https://epayment-test.bbs.no/netaxept.svc?wsdl')
 MERCHANTID = getattr(settings, 'NETAXEPT_MERCHANTID', '')
@@ -49,6 +50,7 @@ def get_basic_registerrequest(client, redirecturl, language):
     return request
         
 def handle_response_exception(exception, obj):
+    logger.debug(exception.fault)
     fault = exception.fault.detail[0]
     obj.flagged = True
     obj.responsecode = getattr(fault, 'ResponseCode', None)

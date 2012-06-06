@@ -4,6 +4,7 @@ from djnetaxept.utils import get_client, get_basic_registerrequest, get_netaxept
 from djnetaxept.operations import register, process, query, batch
 from djnetaxept.exceptions import PaymentNotAuthorized, AmountAllreadyCaptured, NoAmountCaptured
 
+
 class NetaxeptPaymentManager(models.Manager):
     
     def register_payment(self,
