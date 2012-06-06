@@ -12,6 +12,7 @@ STATUS_CHOICES = (
 class NetaxeptPayment(models.Model):
     transaction_id = models.CharField(max_length=32)
     amount = models.IntegerField(null=True, blank=True)
+    currencycode = models.CharField(max_length=3)
     description = models.CharField(max_length=255)
     ordernumber = models.CharField(max_length=32)
     flagged = models.BooleanField()
