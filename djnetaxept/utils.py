@@ -3,7 +3,6 @@
 from suds.client import Client
 
 from django.conf import settings
-from djnetaxept.models import NetaxeptPayment, NetaxeptTransaction
 
 WSDL = getattr(settings, 'NETAXEPT_WSDL', 'https://epayment-test.bbs.no/netaxept.svc?wsdl')
 MERCHANTID = getattr(settings, 'NETAXEPT_MERCHANTID', '')
@@ -19,7 +18,7 @@ def get_client():
 def get_netaxept_object(client, obj):
     return client.factory.create('ns1:%s' % obj)
     
-def get_basic_registerrequestuest(client, redirecturl, language):
+def get_basic_registerrequest(client, redirecturl, language):
     # return a basic registerrequestuest without order
     environment = get_netaxept_object(client, 'Environment')
     environment.Language = None
