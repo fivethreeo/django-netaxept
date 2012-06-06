@@ -53,7 +53,7 @@ def handle_response_exception(exception, obj):
     bbsexception = exception.fault.detail.BBSException 
     result = bbsexception.Result
     obj.flagged = True
-    obj.responsecode = result.ResponseCode
+    obj.responsecode = str(result.ResponseCode)
     obj.responsesource = result.ResponseSource
     obj.responsetext = result.ResponseText
     obj.message = bbsexception.Message
