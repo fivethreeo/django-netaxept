@@ -7,6 +7,8 @@ from django.conf import settings
 WSDL = getattr(settings, 'NETAXEPT_WSDL', 'https://epayment-test.bbs.no/netaxept.svc?wsdl')
 MERCHANTID = getattr(settings, 'NETAXEPT_MERCHANTID', '')
 TOKEN = getattr(settings, 'NETAXEPT_TOKEN', '')
+TERMNAL = getattr(settings, 'NETAXEPT_TERMINAL', 'https://epayment-test.bbs.no/Terminal/default.aspx')
+CURRENCY_CODE = getattr(settings, 'NETAXEPT_CURRENCY_CODE', 'NOK')
 
 AUTOAUTH = getattr(settings, 'NETAXEPT_AUTOAUTH', None)
 PAYMENT_METHOD_LIST = getattr(settings, 'NETAXEPT_PAYMENT_METHOD_LIST', None)
