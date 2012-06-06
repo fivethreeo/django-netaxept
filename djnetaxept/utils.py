@@ -52,7 +52,7 @@ def get_basic_registerrequest(client, redirecturl, language):
 def handle_response_exception(exception, obj):
     logger.debug(exception.fault)
     bbsexception = getattr(exception.fault.detail, 'BBSException', None)
-    if bbsexception
+    if bbsexception:
         result = bbsexception.Result
         obj.flagged = True
         obj.responsecode = str(result.ResponseCode)
