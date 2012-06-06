@@ -34,7 +34,7 @@ class NetaxeptPayment(models.Model):
     def annul(self):
         return NetaxeptTransaction.objects.annul_payment(self)
     
-    def completed():
+    def completed(self):
         return not self.is_flagged
     
 """
@@ -69,5 +69,5 @@ class NetaxeptTransaction(models.Model):
 
     objects = NetaxeptTransactionManager()
 
-    def completed():
+    def completed(self):
         return not self.is_flagged
