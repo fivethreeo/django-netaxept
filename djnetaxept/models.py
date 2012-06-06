@@ -1,5 +1,5 @@
 from django.db import models
-from djnetaxep.managers import NetaxeptPaymentManager, NetaxeptTransactionManager
+from djnetaxept.managers import NetaxeptPaymentManager, NetaxeptTransactionManager
 
 STATUS_CHOICES = (
     ('AUTHORIZED', 'AUTHORIZED'),
