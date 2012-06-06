@@ -50,12 +50,10 @@ def get_basic_registerrequest(client, redirecturl, language):
     return request
         
 def handle_response_exception(exception, obj):
-    logger.debug(exception.fault)
-    fault = exception.fault.detail[0]
+    result = exception.fault.detail.BBSException.Result
     obj.flagged = True
-    obj.responsecode = getattr(fault, 'ResponseCode', None)
-    obj.responsesource = getattr(fault, 'ResponseSource', None)
-    text = getattr(fault, 'ResponseText', None)
-    if not text:
-        text = getattr(fault, 'Message', None)
-    obj.responsetext = text
+    obj.responsecode = result.ResponseCode
+    obj.responsesource = result.ResponseSource
+    obj.responsetext = result.ResponseText
+    obj.message = exception.fault.detail.Message
+    logger.debug(obj.__dict__)
