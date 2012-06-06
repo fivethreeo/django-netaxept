@@ -16,7 +16,7 @@ class NetaxeptPaymentManager(models.Manager):
         client = get_client()
         request = get_basic_registerrequest(client, redirect_url, None)
     
-        order = get_netaxept_object(client, client, 'Order')
+        order = get_netaxept_object(client, 'Order')
         order.Amount = amount # store
         order.CurrencyCode = currencycode # store
         order.OrderNumber = ordernumber# store
