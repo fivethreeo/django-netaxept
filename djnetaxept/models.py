@@ -17,7 +17,7 @@ class NetaxeptPayment(models.Model):
     ordernumber = models.CharField(max_length=32)
     flagged = models.BooleanField()
     responsecode = models.CharField(max_length=3, null=True, blank=True)
-    responsesource = models.CharField(max_length=2, null=True, blank=True)
+    responsesource = models.CharField(max_length=20, null=True, blank=True)
     responsetext = models.CharField(max_length=255, null=True, blank=True)
 
     objects = NetaxeptPaymentManager()
@@ -64,7 +64,7 @@ class NetaxeptTransaction(models.Model):
     amount = models.PositiveIntegerField(null=True, blank=True)
     flagged = models.BooleanField()
     responsecode = models.CharField(max_length=3, null=True, blank=True)
-    responsesource = models.CharField(max_length=2, null=True, blank=True)
+    responsesource = models.CharField(max_length=20, null=True, blank=True)
     responsetext = models.CharField(max_length=255, null=True, blank=True)
 
     objects = NetaxeptTransactionManager()
