@@ -35,7 +35,7 @@ class NetaxeptPayment(models.Model):
         return NetaxeptTransaction.objects.annul_payment(self)
     
     def completed(self):
-        return not self.is_flagged
+        return not self.flagged
     
 """
 RECURRING_CHOICES = (
@@ -70,4 +70,4 @@ class NetaxeptTransaction(models.Model):
     objects = NetaxeptTransactionManager()
 
     def completed(self):
-        return not self.is_flagged
+        return not self.flagged
