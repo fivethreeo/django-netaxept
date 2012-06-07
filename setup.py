@@ -17,7 +17,7 @@ setup(
     name='django-netaxept',
     version=djnetaxept.get_version(),
     description='This is a generic payment app for django using Netaxept',
-    long_description=open(os.path.join(os.path.dirname(__file__), 'README.txt')).read(),
+    long_description=open(os.path.join(os.path.dirname(__file__), 'README.rst')).read(),
     author='Oyvind Saltvik',
     author_email='oyvind.saltvik@gmail.com',
     url='http://github.com/fivethreeo/django-netaxept/',
