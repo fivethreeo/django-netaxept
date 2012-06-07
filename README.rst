@@ -13,7 +13,7 @@ For the current stable version:
  
     pip install django-netaxept
     
-For the development version
+For the development version:
 
 ::
 

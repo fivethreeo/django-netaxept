@@ -31,5 +31,5 @@ setup(
     classifiers=CLASSIFIERS,
     include_package_data=True,
     zip_safe=False,
-    install_requires=['suds']
+    install_requires=['suds', 'Django>=1.3']
 )
