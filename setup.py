@@ -4,7 +4,7 @@ import os
 import djnetaxept
 
 CLASSIFIERS = [
-        'Development Status :: 5 - Production/Stable',
+        'Development Status :: 4 - Beta',
         'Environment :: Web Environment',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
