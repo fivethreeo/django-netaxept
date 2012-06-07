@@ -22,7 +22,7 @@ For the development version:
 Configuration
 -------------
 
-Add `django-netaxept` to `settings.INSTALLED_APPS` and run:
+Add ``djnetaxept`` to ``settings.INSTALLED_APPS`` and run:
 
 ::
 
