@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 from __future__ import with_statement
-from shop_example.test_utils.cli import configure
+from djnetaxept.test_utils.cli import configure
 
 import argparse
 import sys

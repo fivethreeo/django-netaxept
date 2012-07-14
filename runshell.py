@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from shop_example.test_utils.cli import configure
+from djnetaxept.test_utils.cli import configure
 
 def main(wsdl, merchantid, token):
     
