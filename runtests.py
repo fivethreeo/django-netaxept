@@ -22,9 +22,9 @@ def runtests(configure=None, test_runner=None, junit_output_dir='.',
     
 def runtests_parse(test_labels_prefix='djeasytests', default_test_labels=['djeasytests'], tmp_dir_prefix='djeasytests', **kwargs):
     parser = argparse.ArgumentParser()
-    parser.add_argument('--wsdl', action='store', dest='wsdl')
-    parser.add_argument('--merchantid', action='store', dest='merchantid')
-    parser.add_argument('--token', action='store', dest='token')
+    parser.add_argument('--wsdl', action='store', dest='wsdl', default='https://epayment-test.bbs.no/netaxept.svc?wsdl')
+    parser.add_argument('--merchantid', action='store', dest='merchantid', required=True)
+    parser.add_argument('--token', action='store', dest='token', required=True)
     parser.add_argument('--jenkins', action='store_true', default=False,
             dest='jenkins')
     parser.add_argument('--jenkins-data-dir', default='.', dest='jenkins_data_dir')

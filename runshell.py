@@ -20,8 +20,8 @@ def main(wsdl, merchantid, token):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--wsdl', action='store', dest='wsdl')
-    parser.add_argument('--merchantid', action='store', dest='merchantid')
-    parser.add_argument('--token', action='store', dest='token')
+    parser.add_argument('--wsdl', action='store', dest='wsdl', default='https://epayment-test.bbs.no/netaxept.svc?wsdl')
+    parser.add_argument('--merchantid', action='store', dest='merchantid', required=True)
+    parser.add_argument('--token', action='store', dest='token', required=True)
     args = parser.parse_args()
     main(args.wsdl, args.merchantid, args.token)
