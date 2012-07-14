@@ -9,7 +9,7 @@ def main(wsdl, merchantid, token):
                 'ENGINE': 'django.db.backends.sqlite3',
                 'NAME': 'djnetaxept.sqlite',
             }
-        }
+        },
         NETAXEPT_WSDL = wsdl,
         NETAXEPT_MERCHANTID = merchantid,
         NETAXEPT_TOKEN = token
