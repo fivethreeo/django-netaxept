@@ -1,0 +1,10 @@
+django>=1.4
+django-shop
+django-shop-categories
+django-mptt
+django-treeadmin
+django-easytests
+PIL
+South
+easy-thumbnails
+django-tinymce
