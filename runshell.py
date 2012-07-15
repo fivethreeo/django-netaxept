@@ -32,7 +32,7 @@ default_settings.update(dict(
         'django.contrib.sites',
         'django.contrib.staticfiles',
         'djnetaxept'
-    
+    ]
 ))
 
 testsetup = NetaxeptTestSetup(appname='djnetaxept', default_settings=default_settings)
