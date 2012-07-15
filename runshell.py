@@ -15,7 +15,10 @@ def main(wsdl, merchantid, token):
         NETAXEPT_MERCHANTID = merchantid,
         NETAXEPT_TOKEN = token
     )
+    new_db = not os.path.exists('djnetaxept.sqlite')
     from django.core.management import call_command
+    call_command('syncdb', interactive=False, migrate_all=new_db)
+    call_command('migrate', interactive=False, fake=new_db)
     call_command('shell')
 
 if __name__ == '__main__':
