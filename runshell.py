@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 from djnetaxept.test_utils.cli import configure
 import argparse
+import os
 
 def main(wsdl, merchantid, token):
     
