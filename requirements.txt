@@ -1,3 +1,4 @@
+django-easytests
 argparse
 suds
 django>=1.4
