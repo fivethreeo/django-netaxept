@@ -26,7 +26,7 @@ def get_basic_registerrequest(client, redirecturl, language):
     environment = get_netaxept_object(client, 'Environment')
     environment.Language = None
     environment.OS = None
-    environment.WebServicePlatform = 'ZSI' 
+    environment.WebServicePlatform = 'SUDS' 
     
     terminal = order = get_netaxept_object(client, 'Terminal')
     terminal.AutoAuth = AUTOAUTH
