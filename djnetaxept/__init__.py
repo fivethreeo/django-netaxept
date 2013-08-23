@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-VERSION = (0, 8, 0, 'beta', 1)
+VERSION = (0, 8, 0, 'beta', 2)
 
 def get_version(): # pragma: no cover
     version = '%s.%s' % (VERSION[0], VERSION[1])
@@ -9,5 +9,5 @@ def get_version(): # pragma: no cover
         version = '%s pre-alpha' % version
     else:
         if VERSION[3] != 'final':
-            version = '%s %s %s' % (version, VERSION[3], VERSION[4])
+            version = '%s.%s.%s' % (version, VERSION[3], VERSION[4])
     return version
