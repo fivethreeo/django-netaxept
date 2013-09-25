@@ -69,7 +69,33 @@ class NetaxeptTransactionManager(models.Manager):
             
         transaction.save()
         return transaction
-    
+        
+    def sale_payment(self, payment):
+        
+        if not payment.completed():
+            raise PaymentRegistrationNotCompleted
+                 
+        client = get_client()
+        operation = 'SALE'
+        
+        request = get_netaxept_object(client, 'ProcessRequest')
+        request.Operation = operation
+        request.TransactionId = payment.transaction_id
+        
+        transaction = self.model(
+            payment=payment,
+            transaction_id=payment.transaction_id,
+            operation=operation
+        )
+        
+        try:
+            response = process(client, request)
+        except suds.WebFault, e:
+            handle_response_exception(e, transaction)
+            
+        transaction.save()
+        return transaction
+        
     def capture_payment(self, payment, amount):
         
         self.require_auth(payment)

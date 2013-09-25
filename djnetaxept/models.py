@@ -24,16 +24,10 @@ class NetaxeptPayment(models.Model):
     
     def auth(self):
         return NetaxeptTransaction.objects.auth_payment(self)
-
-    def capture(self, amount):
-        return NetaxeptTransaction.objects.capture_payment(self, amount)
         
-    def credit(self, amount):
-        return NetaxeptTransaction.objects.credit_payment(self, amount)
+    def sale(self):
+        return NetaxeptTransaction.objects.sale_payment(self)
         
-    def annul(self):
-        return NetaxeptTransaction.objects.annul_payment(self)
-    
     def completed(self):
         return not self.flagged
     
@@ -69,5 +63,14 @@ class NetaxeptTransaction(models.Model):
 
     objects = NetaxeptTransactionManager()
 
+    def capture(self, amount):
+        return NetaxeptTransaction.objects.capture_payment(self.payment, amount)
+        
+    def credit(self, amount):
+        return NetaxeptTransaction.objects.credit_payment(self.payment, amount)
+        
+    def annul(self):
+        return NetaxeptTransaction.objects.annul_payment(self.payment)
+        
     def completed(self):
         return not self.flagged
