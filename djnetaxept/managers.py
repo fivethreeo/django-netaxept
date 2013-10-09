@@ -1,8 +1,8 @@
 import suds
 from django.db import models
-from djnetaxept.utils import get_client, get_basic_registerrequest, get_netaxept_object, handle_response_exception, ProcessException
+from djnetaxept.utils import get_client, get_basic_registerrequest, get_netaxept_object, handle_response_exception, 
 from djnetaxept.operations import register, process, query, batch
-from djnetaxept.exceptions import PaymentNotAuthorized, AmountAllreadyCaptured, NoAmountCaptured
+from djnetaxept.exceptions import PaymentNotAuthorized, AmountAllreadyCaptured, NoAmountCaptured, ProcessException
 
 
 class NetaxeptPaymentManager(models.Manager):
