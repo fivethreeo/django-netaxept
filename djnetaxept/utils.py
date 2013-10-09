@@ -15,6 +15,7 @@ AUTOAUTH = getattr(settings, 'NETAXEPT_AUTOAUTH', None)
 PAYMENT_METHOD_LIST = getattr(settings, 'NETAXEPT_PAYMENT_METHOD_LIST', None)
 PAYMENT_FEE_LIST = getattr(settings, 'NETAXEPT_PAYMENT_FEE_LIST', None)
 
+
 def get_client():        
     return Client(WSDL, faults=True)
     
