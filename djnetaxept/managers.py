@@ -4,6 +4,7 @@ from djnetaxept.utils import get_client, get_basic_registerrequest, get_netaxept
 from djnetaxept.operations import register, process, query, batch
 from djnetaxept.exceptions import PaymentNotAuthorized, AmountAllreadyCaptured, NoAmountCaptured, ProcessException
 
+logger = logging.getLogger('djnetaxept.managers')
 
 class NetaxeptPaymentManager(models.Manager):
     
@@ -37,6 +38,7 @@ class NetaxeptPaymentManager(models.Manager):
             response = register(client, request)
             payment.transaction_id = response.TransactionId
         except suds.WebFault, e:
+            logger.exception("Error registering payment")
             handle_response_exception(e, payment)
         
         payment.save()
@@ -47,6 +49,7 @@ class NetaxeptTransactionManager(models.Manager):
     def auth_payment(self, payment):
         
         if not payment.completed():
+             logger.error("Payment registration not completed")
              raise PaymentRegistrationNotCompleted
                  
         client = get_client()
@@ -67,6 +70,7 @@ class NetaxeptTransactionManager(models.Manager):
         try:
             response = process(client, request)
         except suds.WebFault, e:
+            logger.exception("Authorization on payment failed")
             err = e
             handle_response_exception(e, transaction)
             
@@ -78,6 +82,7 @@ class NetaxeptTransactionManager(models.Manager):
     def sale_payment(self, payment):
         
         if not payment.completed():
+            logger.error("Payment registration not completed")
             raise PaymentRegistrationNotCompleted
                  
         client = get_client()
@@ -98,6 +103,7 @@ class NetaxeptTransactionManager(models.Manager):
         try:
             response = process(client, request)
         except suds.WebFault, e:
+            logger.exception("Sale on payment failed")
             err = e
             handle_response_exception(e, transaction)
             
@@ -130,6 +136,7 @@ class NetaxeptTransactionManager(models.Manager):
         try:
             response = process(client, request)
         except suds.WebFault, e:
+            logger.exception("Capture on payment not failed")
             err = e
             handle_response_exception(e, transaction)
             
@@ -143,6 +150,7 @@ class NetaxeptTransactionManager(models.Manager):
         self.require_auth(payment)
         
         if not self.get_query_set().filter(payment=payment, operation='CAPTURE').exists():
+            logger.error("No amount captured, cannot credit")
             raise NoAmountCaptured        
             
         client = get_client()
@@ -165,6 +173,7 @@ class NetaxeptTransactionManager(models.Manager):
         try:
             response = process(client, request)
         except suds.WebFault, e:
+            logger.exception("Credit on payment not failed")
             err = e
             handle_response_exception(e, transaction)
             
@@ -178,6 +187,7 @@ class NetaxeptTransactionManager(models.Manager):
         self.require_auth(payment)
         
         if self.get_query_set().filter(payment=payment, operation='CAPTURE').exists():
+            logger.error("Amount allready captured, cannot annul")
             raise AmountAllreadyCaptured
                    
         client = get_client()
@@ -198,6 +208,7 @@ class NetaxeptTransactionManager(models.Manager):
         try:
             response = process(client, request)
         except suds.WebFault, e:
+            logger.exception("Annul on payment not failed")
             err = e
             handle_response_exception(e, transaction)
         
@@ -208,4 +219,5 @@ class NetaxeptTransactionManager(models.Manager):
     
     def require_auth(self, payment):
         if not self.get_query_set().filter(payment=payment, operation='AUTH').exists():
+            logger.error("Payment not authorized")
             raise PaymentNotAuthorized
