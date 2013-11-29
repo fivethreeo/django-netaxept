@@ -1,3 +1,4 @@
+import logging
 import suds
 from django.db import models
 from djnetaxept.utils import get_client, get_basic_registerrequest, get_netaxept_object, handle_response_exception 
