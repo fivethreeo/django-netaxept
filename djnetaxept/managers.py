@@ -1,6 +1,8 @@
 import logging
 import suds
 from django.db import models
+from django.db.models import Q
+
 from djnetaxept.utils import get_client, get_basic_registerrequest, get_netaxept_object, handle_response_exception 
 from djnetaxept.operations import register, process, query, batch
 from djnetaxept.exceptions import PaymentNotAuthorized, AmountAllreadyCaptured, NoAmountCaptured, ProcessException
