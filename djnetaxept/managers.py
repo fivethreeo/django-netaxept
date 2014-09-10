@@ -150,7 +150,7 @@ class NetaxeptTransactionManager(models.Manager):
         
         self.require_auth(payment)
         
-        if not self.get_query_set().filter(payment=payment, operation='CAPTURE').exists():
+        if not self.get_query_set().filter(Q(operation='CAPTURE') | Q(operation='SALE'), payment=payment).exists():
             logger.error("No amount captured, cannot credit")
             raise NoAmountCaptured        
             
@@ -187,7 +187,7 @@ class NetaxeptTransactionManager(models.Manager):
         
         self.require_auth(payment)
         
-        if self.get_query_set().filter(payment=payment, operation='CAPTURE').exists():
+        if self.get_query_set().filter(Q(operation='CAPTURE') | Q(operation='SALE'), payment=payment).exists():
             logger.error("Amount allready captured, cannot annul")
             raise AmountAllreadyCaptured
                    
