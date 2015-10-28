@@ -150,8 +150,6 @@ class NetaxeptTransactionManager(models.Manager):
     
     def credit_payment(self, payment, amount):
         
-        self.require_auth(payment)
-        
         if not self.get_query_set().filter(Q(operation='CAPTURE') | Q(operation='SALE'), payment=payment).exists():
             logger.error("No amount captured, cannot credit")
             raise NoAmountCaptured        
