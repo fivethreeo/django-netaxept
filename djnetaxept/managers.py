@@ -43,8 +43,9 @@ class NetaxeptPaymentManager(models.Manager):
         except suds.WebFault, e:
             logger.exception("Error registering payment")
             handle_response_exception(e, payment)
-        
-        payment.save()
+        finally:
+            payment.save()
+            
         return payment
         
 class NetaxeptTransactionManager(models.Manager):
@@ -76,10 +77,9 @@ class NetaxeptTransactionManager(models.Manager):
             logger.exception("Authorization on payment failed")
             err = e
             handle_response_exception(e, transaction)
+        finally:
+            transaction.save()
             
-        transaction.save()
-        if err:
-            raise ProcessException(operation)
         return transaction
         
     def sale_payment(self, payment):
@@ -109,10 +109,9 @@ class NetaxeptTransactionManager(models.Manager):
             logger.exception("Sale on payment failed")
             err = e
             handle_response_exception(e, transaction)
+        finally:
+            transaction.save()
             
-        transaction.save()
-        if err:
-            raise ProcessException(operation)
         return transaction
         
     def capture_payment(self, payment, amount):
@@ -142,10 +141,8 @@ class NetaxeptTransactionManager(models.Manager):
             logger.exception("Capture on payment not failed")
             err = e
             handle_response_exception(e, transaction)
-            
-        transaction.save()
-        if err:
-            raise ProcessException(operation)
+        finally:
+            transaction.save()
         return transaction
     
     def credit_payment(self, payment, amount):
@@ -177,10 +174,8 @@ class NetaxeptTransactionManager(models.Manager):
             logger.exception("Credit on payment not failed")
             err = e
             handle_response_exception(e, transaction)
-            
-        transaction.save()
-        if err:
-            raise ProcessException(operation)
+        finally:
+            transaction.save()
         return transaction
         
     def annul_payment(self, payment):
@@ -212,10 +207,8 @@ class NetaxeptTransactionManager(models.Manager):
             logger.exception("Annul on payment not failed")
             err = e
             handle_response_exception(e, transaction)
-        
-        transaction.save()
-        if err:
-            raise ProcessException(operation)
+        finally:
+            transaction.save()
         return transaction
     
     def require_auth(self, payment):
