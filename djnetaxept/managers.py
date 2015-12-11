@@ -134,6 +134,7 @@ class NetaxeptTransactionManager(models.Manager):
             handle_response_exception(e, transaction)
         finally:
             transaction.save()
+            
         return transaction
     
     def credit_payment(self, payment, amount):
@@ -164,6 +165,7 @@ class NetaxeptTransactionManager(models.Manager):
             handle_response_exception(e, transaction)
         finally:
             transaction.save()
+            
         return transaction
         
     def annul_payment(self, payment):
@@ -194,6 +196,7 @@ class NetaxeptTransactionManager(models.Manager):
             handle_response_exception(e, transaction)
         finally:
             transaction.save()
+            
         return transaction
     
     def require_auth(self, payment):
