@@ -125,7 +125,7 @@ class NetaxeptTransactionManager(models.Manager):
         request = get_netaxept_object(client, 'ProcessRequest')
         request.Operation = operation
         request.TransactionId = payment.transaction_id
-        request.Amount = amount
+        request.TransactionAmount = amount
         
         transaction = self.model(
             payment=payment,
@@ -160,7 +160,7 @@ class NetaxeptTransactionManager(models.Manager):
         request = get_netaxept_object(client, 'ProcessRequest')
         request.Operation = operation
         request.TransactionId = payment.transaction_id
-        request.Amount = amount
+        request.TransactionAmount = amount
         
         transaction = self.model(
             payment=payment,
