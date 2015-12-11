@@ -41,7 +41,7 @@ class NetaxeptPaymentManager(models.Manager):
             response = register(client, request)
             payment.transaction_id = response.TransactionId
         except suds.WebFault, e:
-            logger.exception("Error registering payment")
+            logger.error("Error registering payment")
             handle_response_exception(e, payment)
         finally:
             payment.save()
@@ -69,13 +69,10 @@ class NetaxeptTransactionManager(models.Manager):
             operation=operation
         )
         
-        err = None
-        
         try:
             response = process(client, request)
         except suds.WebFault, e:
-            logger.exception("Authorization on payment failed")
-            err = e
+            logger.error("Authorization on payment failed")
             handle_response_exception(e, transaction)
         finally:
             transaction.save()
@@ -101,13 +98,10 @@ class NetaxeptTransactionManager(models.Manager):
             operation=operation
         )
         
-        err = None
-        
         try:
             response = process(client, request)
         except suds.WebFault, e:
-            logger.exception("Sale on payment failed")
-            err = e
+            logger.error("Sale on payment failed")
             handle_response_exception(e, transaction)
         finally:
             transaction.save()
@@ -133,13 +127,10 @@ class NetaxeptTransactionManager(models.Manager):
             operation=operation
         )
         
-        err = None
-        
         try:
             response = process(client, request)
         except suds.WebFault, e:
-            logger.exception("Capture on payment not failed")
-            err = e
+            logger.error("Capture on payment not failed")
             handle_response_exception(e, transaction)
         finally:
             transaction.save()
@@ -166,13 +157,10 @@ class NetaxeptTransactionManager(models.Manager):
             operation=operation
         )
         
-        err = None
-        
         try:
             response = process(client, request)
         except suds.WebFault, e:
-            logger.exception("Credit on payment not failed")
-            err = e
+            logger.error("Credit on payment not failed")
             handle_response_exception(e, transaction)
         finally:
             transaction.save()
@@ -198,14 +186,11 @@ class NetaxeptTransactionManager(models.Manager):
             transaction_id=payment.transaction_id,
             operation=operation
         )
-        
-        err = None
                 
         try:
             response = process(client, request)
         except suds.WebFault, e:
-            logger.exception("Annul on payment not failed")
-            err = e
+            logger.error("Annul on payment not failed")
             handle_response_exception(e, transaction)
         finally:
             transaction.save()
