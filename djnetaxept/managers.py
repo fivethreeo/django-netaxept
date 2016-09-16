@@ -40,7 +40,7 @@ class NetaxeptPaymentManager(models.Manager):
         try:
             response = register(client, request)
             payment.transaction_id = response.TransactionId
-        except suds.WebFault, e:
+        except suds.WebFault as e:
             logger.error("Error registering payment")
             handle_response_exception(e, payment)
         finally:
@@ -71,7 +71,7 @@ class NetaxeptTransactionManager(models.Manager):
         
         try:
             response = process(client, request)
-        except suds.WebFault, e:
+        except suds.WebFault as e:
             logger.error("Authorization on payment failed")
             handle_response_exception(e, transaction)
         finally:
@@ -100,7 +100,7 @@ class NetaxeptTransactionManager(models.Manager):
         
         try:
             response = process(client, request)
-        except suds.WebFault, e:
+        except suds.WebFault as e:
             logger.error("Sale on payment failed")
             handle_response_exception(e, transaction)
         finally:
@@ -129,7 +129,7 @@ class NetaxeptTransactionManager(models.Manager):
         
         try:
             response = process(client, request)
-        except suds.WebFault, e:
+        except suds.WebFault as e:
             logger.error("Capture on payment not failed")
             handle_response_exception(e, transaction)
         finally:
@@ -160,7 +160,7 @@ class NetaxeptTransactionManager(models.Manager):
         
         try:
             response = process(client, request)
-        except suds.WebFault, e:
+        except suds.WebFault as e:
             logger.error("Credit on payment failed")
             handle_response_exception(e, transaction)
         finally:
@@ -191,7 +191,7 @@ class NetaxeptTransactionManager(models.Manager):
                 
         try:
             response = process(client, request)
-        except suds.WebFault, e:
+        except suds.WebFault as e:
             logger.error("Annul on payment failed")
             handle_response_exception(e, transaction)
         finally:
